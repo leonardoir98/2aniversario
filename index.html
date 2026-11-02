@@ -112,6 +112,14 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #1DB954;
         }
+    
+        /* FIX: botones de los slides clickeables sobre la capa de navegación */
+        #slides-wrapper .slide-item { pointer-events: none !important; }
+        #slides-wrapper .slide-item.opacity-100 button,
+        #slides-wrapper .slide-item.opacity-100 label,
+        #slides-wrapper .slide-item.opacity-100 input,
+        #slides-wrapper .slide-item.opacity-100 #memory-grid,
+        #slides-wrapper .slide-item.opacity-100 [onclick] { pointer-events: auto !important; }
     </style>
 </head>
 
@@ -210,7 +218,7 @@
             <!-- ========================================== -->
             <!-- SLIDE CONTENT AREA (CHANGES PER SLIDE)     -->
             <!-- ========================================== -->
-            <div id="slides-wrapper" class="relative my-auto z-10 w-full min-h-[460px] flex items-center justify-center">
+            <div id="slides-wrapper" class="relative my-auto z-30 pointer-events-none w-full min-h-[460px] flex items-center justify-center">
 
                 <!-- SLIDE 1: MINUTOS ESCUCHADOS -->
                 <div class="slide-item absolute inset-0 flex flex-col justify-center space-y-6 opacity-0 transition-all duration-500 transform translate-y-4 pointer-events-none">
