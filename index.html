@@ -176,7 +176,7 @@
         <!-- ========================================== -->
         <!-- STORIES CONTAINER (SLIDES SYSTEM)          -->
         <!-- ========================================== -->
-        <div id="wrapped-story-view" class="relative w-full h-full flex flex-col justify-between p-6 z-30 opacity-0 pointer-events-none transition-opacity duration-500">
+        <div id="wrapped-story-view" class="relative w-full h-full flex flex-col justify-between p-6 z-10 opacity-0 pointer-events-none transition-opacity duration-500">
             
             <!-- TOP STORY PROGRESS BARS -->
             <div id="progress-bars-container" class="flex space-x-1.5 z-30 pt-2">
@@ -201,8 +201,8 @@
                 </button>
             </div>
 
-            <!-- TAP NAVIGATION ZONES (Left / Right) - BAJADAS A Z-10 PARA NO TUPIR BOTONES -->
-            <div class="absolute inset-0 z-10 flex pointer-events-auto">
+            <!-- TAP NAVIGATION ZONES (Left / Right) -->
+            <div class="absolute inset-0 z-20 flex pointer-events-auto">
                 <div onclick="prevSlide()" class="w-1/3 h-full cursor-pointer"></div>
                 <div onclick="nextSlide()" class="w-2/3 h-full cursor-pointer"></div>
             </div>
@@ -210,7 +210,7 @@
             <!-- ========================================== -->
             <!-- SLIDE CONTENT AREA (CHANGES PER SLIDE)     -->
             <!-- ========================================== -->
-            <div id="slides-wrapper" class="relative my-auto z-30 w-full min-h-[460px] flex items-center justify-center">
+            <div id="slides-wrapper" class="relative my-auto z-10 w-full min-h-[460px] flex items-center justify-center">
 
                 <!-- SLIDE 1: MINUTOS ESCUCHADOS -->
                 <div class="slide-item absolute inset-0 flex flex-col justify-center space-y-6 opacity-0 transition-all duration-500 transform translate-y-4 pointer-events-none">
@@ -305,7 +305,7 @@
                             <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Galería de Hits</span>
                             <h2 class="text-2xl sm:text-3xl font-extrabold leading-tight">Top 5 Memorias</h2>
                         </div>
-                        <label class="cursor-pointer text-[11px] font-bold bg-spotify/20 text-spotify border border-spotify/40 px-3 py-1.5 rounded-full hover:bg-spotify/30 transition-all flex items-center space-x-1 z-40">
+                        <label class="cursor-pointer text-[11px] font-bold bg-spotify/20 text-spotify border border-spotify/40 px-3 py-1.5 rounded-full hover:bg-spotify/30 transition-all flex items-center space-x-1 z-30">
                             <i class="fa-solid fa-plus"></i>
                             <span>Añadir Fotos</span>
                             <input type="file" id="photo-upload" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event)">
@@ -351,7 +351,7 @@
                     <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Tu Track #1 En Repetición</span>
 
                     <!-- Track Selector Pills -->
-                    <div class="flex justify-center space-x-2 z-40">
+                    <div class="flex justify-center space-x-2 z-30">
                         <button id="track-btn-0" onclick="switchTrack(0)" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-spotify text-black shadow-md cursor-pointer">
                             Fonseca
                         </button>
@@ -373,7 +373,7 @@
                     </div>
 
                     <!-- Custom Interactive Player Controls -->
-                    <div class="glass-card rounded-2xl p-4 space-y-3 z-40 border border-white/10">
+                    <div class="glass-card rounded-2xl p-4 space-y-3 z-30 border border-white/10">
                         <!-- Progress Bar Simulator / Real Audio Sync -->
                         <div class="space-y-1">
                             <div class="w-full bg-neutral-800 h-1.5 rounded-full overflow-hidden cursor-pointer" onclick="seekSong(event)">
@@ -409,7 +409,7 @@
                     </h2>
 
                     <!-- Romantic Card Preview -->
-                    <div class="glass-card rounded-3xl p-5 border border-spotify/30 space-y-3 text-center z-40 relative overflow-hidden">
+                    <div class="glass-card rounded-3xl p-5 border border-spotify/30 space-y-3 text-center z-30 relative overflow-hidden">
                         <div class="w-12 h-12 mx-auto rounded-full bg-spotify/20 border border-spotify/40 flex items-center justify-center text-spotify text-2xl">
                             <i class="fa-solid fa-envelope-open-text"></i>
                         </div>
@@ -418,8 +418,8 @@
                             Has desbloqueado una carta escrita con el corazón y un vale de canje exclusivo para nuestra celebracion.
                         </p>
 
-                        <!-- Action Button for Letter Modal - ASEGURADO CON Z-50 Y POINTER-EVENTS -->
-                        <button type="button" onclick="openLetterModal()" class="w-full py-3 px-4 bg-gradient-to-r from-spotify to-emerald-400 text-black font-extrabold text-xs tracking-wider uppercase rounded-xl shadow-[0_0_20px_rgba(29,185,84,0.4)] hover:shadow-[0_0_30px_rgba(29,185,84,0.7)] transition-all transform active:scale-95 flex items-center justify-center space-x-2 cursor-pointer z-50 pointer-events-auto">
+                        <!-- Action Button for Letter Modal -->
+                        <button onclick="openLetterModal()" class="w-full py-3 px-4 bg-gradient-to-r from-spotify to-emerald-400 text-black font-extrabold text-xs tracking-wider uppercase rounded-xl shadow-[0_0_20px_rgba(29,185,84,0.4)] hover:shadow-[0_0_30px_rgba(29,185,84,0.7)] transition-all transform active:scale-95 flex items-center justify-center space-x-2 cursor-pointer z-40">
                             <i class="fa-solid fa-heart"></i>
                             <span>LEER MI CARTA DE AMOR</span>
                         </button>
@@ -454,11 +454,11 @@
     <!-- ========================================== -->
     <!-- MODAL: CARTA SECRETA & VOUCHER CANJEABLE   -->
     <!-- ========================================== -->
-    <div id="letter-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-        <div class="relative w-full max-w-lg bg-neutral-900 border border-spotify/40 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto custom-scrollbar pointer-events-auto">
+    <div id="letter-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="relative w-full max-w-lg bg-neutral-900 border border-spotify/40 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto custom-scrollbar">
             
             <!-- Close Button -->
-            <button onclick="closeLetterModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white flex items-center justify-center text-sm transition-colors cursor-pointer z-50">
+            <button onclick="closeLetterModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white flex items-center justify-center text-sm transition-colors cursor-pointer">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
@@ -551,28 +551,25 @@
             setupAudioEvents();
         });
 
-        // START WRAPPED EXPERIENCE (Exposición Global Garantizada)
-        window.startWrapped = function() {
+        // START WRAPPED EXPERIENCE (Fix handler)
+        function startWrapped() {
             const welcomeScreen = document.getElementById('welcome-screen');
-            if (welcomeScreen) {
-                welcomeScreen.classList.add('opacity-0', 'pointer-events-none');
-                setTimeout(() => {
-                    welcomeScreen.style.display = 'none';
-                }, 700);
-            }
+            welcomeScreen.classList.add('opacity-0', 'pointer-events-none');
+            
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+            }, 700);
 
             const storyView = document.getElementById('wrapped-story-view');
-            if (storyView) {
-                storyView.classList.remove('opacity-0', 'pointer-events-none');
-            }
+            storyView.classList.remove('opacity-0', 'pointer-events-none');
 
-            // Play audio safely
+            // Play audio automatically upon entering
             playAudio();
             
             showSlide(0);
             startSlideTimer();
             animateCounter();
-        };
+        }
 
         // Setup HTML5 Audio Listeners
         function setupAudioEvents() {
@@ -604,7 +601,6 @@
         // CREATE STORY PROGRESS BARS
         function setupProgressBars() {
             const container = document.getElementById('progress-bars-container');
-            if (!container) return;
             container.innerHTML = '';
             for (let i = 0; i < totalSlides; i++) {
                 const bar = document.createElement('div');
@@ -615,7 +611,7 @@
         }
 
         // SHOW SPECIFIC SLIDE
-        window.showSlide = function(index) {
+        function showSlide(index) {
             currentSlide = index;
             const slides = document.querySelectorAll('.slide-item');
             
@@ -642,24 +638,24 @@
             }
 
             resetSlideTimer();
-        };
+        }
 
         // SLIDE NAVIGATION CONTROLLERS
-        window.nextSlide = function() {
+        function nextSlide() {
             if (currentSlide < totalSlides - 1) {
                 showSlide(currentSlide + 1);
             } else {
                 showSlide(0);
             }
-        };
+        }
 
-        window.prevSlide = function() {
+        function prevSlide() {
             if (currentSlide > 0) {
                 showSlide(currentSlide - 1);
             } else {
                 showSlide(totalSlides - 1);
             }
-        };
+        }
 
         // TIMERS FOR AUTO ADVANCE
         function startSlideTimer() {
@@ -684,26 +680,21 @@
         }
 
         // AUDIO CONTROL FUNCTIONS
-        window.toggleAudio = function() {
+        function toggleAudio() {
             if (isAudioPlaying) {
                 pauseAudio();
             } else {
                 playAudio();
             }
-        };
+        }
 
         function playAudio() {
-            const playPromise = audioPlayer.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    isAudioPlaying = true;
-                    updateAudioUI(true);
-                }).catch(e => {
-                    isAudioPlaying = false;
-                    updateAudioUI(false);
-                    console.log("Autoplay diferido:", e);
-                });
-            }
+            audioPlayer.play().then(() => {
+                isAudioPlaying = true;
+                updateAudioUI(true);
+            }).catch(e => {
+                console.log("Audio autoplay require interacción previa:", e);
+            });
         }
 
         function pauseAudio() {
@@ -728,11 +719,11 @@
             }
         }
 
-        window.toggleSongPlay = function() {
+        function toggleSongPlay() {
             toggleAudio();
-        };
+        }
 
-        window.switchTrack = function(index) {
+        function switchTrack(index) {
             currentTrackIndex = index;
             audioPlayer.src = playlist[index].src;
             
@@ -753,32 +744,31 @@
             }
 
             playAudio();
-        };
+        }
 
-        window.nextTrack = function() {
+        function nextTrack() {
             const nextIdx = (currentTrackIndex + 1) % playlist.length;
             switchTrack(nextIdx);
-        };
+        }
 
-        window.previousTrack = function() {
+        function previousTrack() {
             const prevIdx = (currentTrackIndex - 1 + playlist.length) % playlist.length;
             switchTrack(prevIdx);
-        };
+        }
 
-        window.seekSong = function(e) {
+        function seekSong(e) {
             const rect = e.currentTarget.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
             const pct = clickX / rect.width;
             if (!isNaN(audioPlayer.duration)) {
                 audioPlayer.currentTime = pct * audioPlayer.duration;
             }
-        };
+        }
 
         // ANIMATE MINUTES COUNTER
         function animateCounter() {
             const target = 1051200; // 2 years in minutes
             const element = document.getElementById('minutes-counter');
-            if (!element) return;
             let current = 0;
             const duration = 2000;
             const step = Math.ceil(target / (duration / 30));
@@ -794,7 +784,7 @@
         }
 
         // HANDLE DYNAMIC PHOTO UPLOAD
-        window.handlePhotoUpload = function(event) {
+        function handlePhotoUpload(event) {
             const files = event.target.files;
             if (!files || files.length === 0) return;
 
@@ -815,15 +805,13 @@
                 };
                 reader.readAsDataURL(file);
             });
-        };
+        }
 
-        // MODAL HANDLERS (EXPOSICIÓN GLOBAL ASEGURADA)
-        window.openLetterModal = function() {
+        // MODAL HANDLERS
+        function openLetterModal() {
             clearInterval(slideInterval);
             const modal = document.getElementById('letter-modal');
-            if (modal) {
-                modal.classList.remove('opacity-0', 'pointer-events-none');
-            }
+            modal.classList.remove('opacity-0', 'pointer-events-none');
             
             // Launch Confetti
             if (window.confetti) {
@@ -834,22 +822,20 @@
                     colors: ['#1DB954', '#ffffff', '#10B981']
                 });
             }
-        };
+        }
 
-        window.closeLetterModal = function() {
+        function closeLetterModal() {
             const modal = document.getElementById('letter-modal');
-            if (modal) {
-                modal.classList.add('opacity-0', 'pointer-events-none');
-            }
+            modal.classList.add('opacity-0', 'pointer-events-none');
             startSlideTimer();
-        };
+        }
 
-        window.claimVoucher = function() {
+        function claimVoucher() {
             const btnText = document.getElementById('claim-btn-text');
             const btn = document.getElementById('claim-btn');
             
-            if (btnText) btnText.innerText = "¡CITA CANJEADA Y CONFIRMADA! ❤️";
-            if (btn) btn.className = "py-2.5 px-6 bg-emerald-400 text-black font-extrabold text-xs rounded-full shadow-lg flex items-center justify-center space-x-2 mx-auto cursor-default";
+            btnText.innerText = "¡CITA CANJEADA Y CONFIRMADA! ❤️";
+            btn.className = "py-2.5 px-6 bg-emerald-400 text-black font-extrabold text-xs rounded-full shadow-lg flex items-center justify-center space-x-2 mx-auto cursor-default";
 
             if (window.confetti) {
                 confetti({
@@ -859,7 +845,7 @@
                     colors: ['#1DB954', '#FFD700', '#FF69B4']
                 });
             }
-        };
+        }
     </script>
 </body>
 </html>
