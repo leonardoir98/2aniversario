@@ -51,7 +51,6 @@
     </script>
 
     <style>
-        /* Custom UI Tweaks & Glassmorphism */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             touch-action: manipulation;
@@ -72,7 +71,6 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* Sound Equalizer Bars Animation */
         .eq-bar {
             animation: bounceBar 1.2s ease-in-out infinite alternate;
         }
@@ -92,12 +90,10 @@
             height: 20% !important;
         }
 
-        /* Story Progress Bar Transition */
         .progress-fill {
             transition: width 0.1s linear;
         }
 
-        /* Custom Scrollbar for Letter Modal */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
@@ -117,24 +113,20 @@
 
 <body class="h-full bg-black text-white flex justify-center items-center select-none overflow-hidden">
 
-    <!-- MAIN APP CONTAINER (Mobile Framed / Desktop Centered) -->
+    <!-- MAIN APP CONTAINER -->
     <main class="relative w-full max-w-md h-full sm:h-[90vh] sm:max-h-[850px] sm:rounded-[40px] bg-spotify-dark overflow-hidden shadow-2xl border border-white/10 flex flex-col justify-between">
 
         <!-- ambient background glow -->
         <div id="bg-glow" class="absolute -top-32 -left-32 w-96 h-96 bg-spotify/20 rounded-full blur-[100px] pointer-events-none transition-all duration-1000 ease-out"></div>
         <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
 
-        <!-- ========================================== -->
-        <!-- SCREEN 0: WELCOME COVER (INTRO)           -->
-        <!-- ========================================== -->
+        <!-- SCREEN 0: WELCOME COVER -->
         <section id="welcome-screen" class="absolute inset-0 z-50 flex flex-col justify-between p-8 bg-gradient-to-b from-neutral-900 via-black to-neutral-950 transition-all duration-700">
-            <!-- Header Logo -->
             <div class="flex items-center space-x-2 pt-4">
                 <i class="fa-brands fa-spotify text-spotify text-3xl"></i>
                 <span class="text-xl font-bold tracking-tight">Loveify <span class="text-xs px-2 py-0.5 rounded-full bg-spotify/20 text-spotify border border-spotify/30 uppercase tracking-widest font-semibold">Wrapped</span></span>
             </div>
 
-            <!-- Hero Main Visual -->
             <div class="flex flex-col items-center text-center my-auto space-y-6">
                 <div class="relative group">
                     <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-3xl bg-gradient-to-tr from-spotify via-emerald-400 to-teal-300 p-1 shadow-[0_0_50px_rgba(29,185,84,0.3)] animate-float">
@@ -144,7 +136,6 @@
                                 2 AÑOS
                             </h2>
                             <p class="text-xs font-medium text-emerald-400 uppercase tracking-widest mt-1">Juntos en Repeat</p>
-                            <!-- Decorative Overlay -->
                             <div class="absolute bottom-2 right-3 text-[10px] text-white/30 font-mono">2024 - 2026</div>
                         </div>
                     </div>
@@ -160,9 +151,9 @@
                 </div>
             </div>
 
-            <!-- Start Button -->
+            <!-- BOTÓN TOTALMENTE ASEGURADO -->
             <div class="pb-6">
-                <button type="button" onclick="startWrapped(event)" class="w-full py-4 px-8 bg-spotify hover:bg-emerald-400 text-black font-bold text-base rounded-full shadow-[0_0_25px_rgba(29,185,84,0.5)] hover:shadow-[0_0_35px_rgba(29,185,84,0.8)] transition-all duration-300 transform active:scale-95 flex items-center justify-center space-x-3 cursor-pointer z-50">
+                <button id="start-btn" onclick="startWrapped()" class="w-full py-4 px-8 bg-spotify hover:bg-emerald-400 text-black font-bold text-base rounded-full shadow-[0_0_25px_rgba(29,185,84,0.5)] transition-all duration-300 transform active:scale-95 flex items-center justify-center space-x-3 cursor-pointer z-50">
                     <span>ABRIR MI WRAPPED</span>
                     <i class="fa-solid fa-play text-xs bg-black text-spotify p-1.5 rounded-full"></i>
                 </button>
@@ -172,18 +163,11 @@
             </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- STORIES CONTAINER (SLIDES SYSTEM)          -->
-        <!-- ========================================== -->
+        <!-- STORIES CONTAINER -->
         <div id="wrapped-story-view" class="relative w-full h-full flex flex-col justify-between p-6 z-10 opacity-0 pointer-events-none transition-opacity duration-500">
             
-            <!-- TOP STORY PROGRESS BARS -->
-            <div id="progress-bars-container" class="flex space-x-1.5 z-30 pt-2">
-                <!-- Dynamically generated progress bars via JS -->
-            </div>
+            <div id="progress-bars-container" class="flex space-x-1.5 z-30 pt-2"></div>
 
-            <!-- TOP HEADER INFO -->
             <div class="flex items-center justify-between z-30 mt-3">
                 <div class="flex items-center space-x-2">
                     <div class="w-8 h-8 rounded-full bg-spotify/20 border border-spotify/40 flex items-center justify-center text-spotify font-bold text-xs">
@@ -195,45 +179,31 @@
                     </div>
                 </div>
 
-                <!-- Ambient Sound Toggle -->
                 <button id="sound-btn" onclick="toggleAudio()" class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-xs text-white/80 hover:text-white transition-colors z-40">
                     <i id="sound-icon" class="fa-solid fa-volume-xmark"></i>
                 </button>
             </div>
 
-            <!-- TAP NAVIGATION ZONES (Left / Right) -->
             <div class="absolute inset-0 z-20 flex pointer-events-auto">
                 <div onclick="prevSlide()" class="w-1/3 h-full cursor-pointer"></div>
                 <div onclick="nextSlide()" class="w-2/3 h-full cursor-pointer"></div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- SLIDE CONTENT AREA (CHANGES PER SLIDE)     -->
-            <!-- ========================================== -->
             <div id="slides-wrapper" class="relative my-auto z-10 w-full min-h-[460px] flex items-center justify-center">
 
-                <!-- SLIDE 1: MINUTOS ESCUCHADOS -->
+                <!-- SLIDE 1 -->
                 <div class="slide-item absolute inset-0 flex flex-col justify-center space-y-6 opacity-0 transition-all duration-500 transform translate-y-4 pointer-events-none">
                     <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Estadística Principal</span>
-                    
-                    <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
-                        No fue un año cualquiera...
-                    </h2>
-
+                    <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">No fue un año cualquiera...</h2>
                     <div class="glass-card rounded-3xl p-6 text-center space-y-2 border border-spotify/30 relative overflow-hidden">
                         <div class="absolute -right-6 -bottom-6 text-spotify/10 text-9xl font-black select-none pointer-events-none">2</div>
                         <p class="text-sm text-neutral-300 font-medium">Has pasado un total de:</p>
-                        <div class="text-4xl sm:text-5xl font-black tracking-tight text-spotify my-2" id="minutes-counter">
-                            0
-                        </div>
+                        <div class="text-4xl sm:text-5xl font-black tracking-tight text-spotify my-2" id="minutes-counter">0</div>
                         <p class="text-xs font-bold uppercase tracking-wider text-neutral-400">Minutos Amándome</p>
                     </div>
-
                     <p class="text-sm text-neutral-300 leading-relaxed">
                         Eso equivale a <span class="text-white font-bold">17,520 horas</span>, <span class="text-white font-bold">730 días</span> o <span class="text-spotify font-bold">2 años enteros</span> de sonrisas, abrazos y recuerdos inolvidables a tu lado.
                     </p>
-
-                    <!-- Animated EQ Bar Graphic -->
                     <div id="eq-graphic" class="flex justify-center items-end space-x-1.5 h-12 pt-2 paused">
                         <div class="eq-bar w-2 bg-spotify rounded-full"></div>
                         <div class="eq-bar w-2 bg-emerald-400 rounded-full"></div>
@@ -243,14 +213,10 @@
                     </div>
                 </div>
 
-                <!-- SLIDE 2: TOP GÉNERO & VIBE -->
+                <!-- SLIDE 2 -->
                 <div class="slide-item absolute inset-0 flex flex-col justify-center space-y-6 opacity-0 transition-all duration-500 transform translate-y-4 pointer-events-none">
                     <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Tu Vibe Favorita</span>
-                    
-                    <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
-                        Tu Género Principal del Año
-                    </h2>
-
+                    <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">Tu Género Principal del Año</h2>
                     <div class="glass-card rounded-3xl p-6 space-y-4 border border-spotify/20">
                         <div class="flex items-center space-x-3">
                             <div class="w-12 h-12 rounded-2xl bg-spotify/20 flex items-center justify-center text-spotify text-2xl">
@@ -261,8 +227,6 @@
                                 <p class="text-xs text-emerald-400 font-medium">100% Compatibilidad Perfecta</p>
                             </div>
                         </div>
-
-                        <!-- Sub-genres list -->
                         <div class="space-y-2 pt-2">
                             <div class="flex justify-between text-xs font-semibold text-neutral-300">
                                 <span>1. Risas Incontrolables</span>
@@ -271,7 +235,6 @@
                             <div class="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
                                 <div class="bg-spotify h-full w-[98%] rounded-full"></div>
                             </div>
-
                             <div class="flex justify-between text-xs font-semibold text-neutral-300 pt-1">
                                 <span>2. Citas & Comidas Deliciosas</span>
                                 <span class="text-spotify">95%</span>
@@ -279,7 +242,6 @@
                             <div class="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
                                 <div class="bg-emerald-400 h-full w-[95%] rounded-full"></div>
                             </div>
-
                             <div class="flex justify-between text-xs font-semibold text-neutral-300 pt-1">
                                 <span>3. Apoyo Mutuo y Abrazos VIP</span>
                                 <span class="text-spotify">100%</span>
@@ -289,565 +251,5 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="p-4 glass-pill rounded-2xl flex items-center space-x-3">
                         <i class="fa-solid fa-sparkles text-spotify text-lg"></i>
-                        <p class="text-xs text-neutral-300">
-                            <strong>Conclusión:</strong> Eres el soundtrack que alegra todos mis días.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- SLIDE 3: TOP 5 MOMENTOS (INTERACTIVE PHOTO GRID WITH LOCAL FOTOS) -->
-                <div class="slide-item absolute inset-0 flex flex-col justify-center space-y-4 opacity-0 transition-all duration-500 transform translate-y-4 pointer-events-none">
-                    <div class="flex justify-between items-end">
-                        <div>
-                            <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Galería de Hits</span>
-                            <h2 class="text-2xl sm:text-3xl font-extrabold leading-tight">Top 5 Memorias</h2>
-                        </div>
-                        <label class="cursor-pointer text-[11px] font-bold bg-spotify/20 text-spotify border border-spotify/40 px-3 py-1.5 rounded-full hover:bg-spotify/30 transition-all flex items-center space-x-1 z-30">
-                            <i class="fa-solid fa-plus"></i>
-                            <span>Añadir Fotos</span>
-                            <input type="file" id="photo-upload" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event)">
-                        </label>
-                    </div>
-
-                    <!-- Photo Grid Container -->
-                    <div id="memory-grid" class="grid grid-cols-2 gap-2.5 h-[310px] overflow-y-auto pr-1 custom-scrollbar z-30">
-                        <!-- Card 1: FOTO1 -->
-                        <div class="relative group h-36 rounded-2xl overflow-hidden glass-card p-2 border border-white/10 flex flex-col justify-end">
-                            <img src="./FOTO1.jpg" alt="Foto 1" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=500&q=80'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                            <span class="relative text-[10px] font-extrabold text-spotify uppercase">#1 Nuestro Viaje</span>
-                            <p class="relative text-xs font-bold text-white truncate">Citas Inolvidables</p>
-                        </div>
-                        <!-- Card 2: FOTO2 -->
-                        <div class="relative group h-36 rounded-2xl overflow-hidden glass-card p-2 border border-white/10 flex flex-col justify-end">
-                            <img src="./FOTO2.jpg" alt="Foto 2" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=500&q=80'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                            <span class="relative text-[10px] font-extrabold text-spotify uppercase">#2 Risas & Café</span>
-                            <p class="relative text-xs font-bold text-white truncate">Momentos Cómplices</p>
-                        </div>
-                        <!-- Card 3: FOTO3 -->
-                        <div class="relative group h-36 rounded-2xl overflow-hidden glass-card p-2 border border-white/10 flex flex-col justify-end">
-                            <img src="./FOTO3.jpg" alt="Foto 3" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=500&q=80'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                            <span class="relative text-[10px] font-extrabold text-spotify uppercase">#3 Atardeceres</span>
-                            <p class="relative text-xs font-bold text-white truncate">Mirando el Futuro</p>
-                        </div>
-                        <!-- Card 4: FOTO4 -->
-                        <div class="relative group h-36 rounded-2xl overflow-hidden glass-card p-2 border border-white/10 flex flex-col justify-end">
-                            <img src="./FOTO4.jpg" alt="Foto 4" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=500&q=80'">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                            <span class="relative text-[10px] font-extrabold text-spotify uppercase">#4 2 Años de Amor</span>
-                            <p class="relative text-xs font-bold text-white truncate">Para Siempre</p>
-                        </div>
-                    </div>
-                    <p class="text-[11px] text-center text-neutral-400">💡 Toca "Añadir Fotos" para personalizar más recuerdos.</p>
-                </div>
-
-                <!-- SLIDE 4: NUESTRA CANCIÓN PRINCIPAL (SPOTIFY PLAYER REAL AUDIOS) -->
-                <div class="slide-item absolute inset-0 flex flex-col justify-center space-y-4 opacity-0 transition-all duration-500 transform translate-y-4 pointer-events-none">
-                    <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Tu Track #1 En Repetición</span>
-
-                    <!-- Track Selector Pills -->
-                    <div class="flex justify-center space-x-2 z-30">
-                        <button id="track-btn-0" onclick="switchTrack(0)" class="px-3 py-1 rounded-full text-xs font-bold transition-all bg-spotify text-black shadow-md cursor-pointer">
-                            Fonseca
-                        </button>
-                        <button id="track-btn-1" onclick="switchTrack(1)" class="px-3 py-1 rounded-full text-xs font-bold transition-all glass-pill text-white/70 hover:text-white cursor-pointer">
-                            Jesse & Joy
-                        </button>
-                    </div>
-
-                    <!-- Album Art & Glowing Frame -->
-                    <div class="relative mx-auto w-44 h-44 sm:w-52 sm:h-52 rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(29,185,84,0.3)] border border-spotify/30 z-30">
-                        <img id="album-cover" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80" alt="Album Cover" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    </div>
-
-                    <!-- Song Meta Details -->
-                    <div class="text-center space-y-1 z-30">
-                        <h3 id="song-title-display" class="text-xl font-extrabold tracking-tight text-white truncate px-2">En Vivo y En Directo</h3>
-                        <p id="song-artist-display" class="text-xs font-semibold text-spotify">Fonseca • Álbim Aniversario Vol. 2</p>
-                    </div>
-
-                    <!-- Custom Interactive Player Controls -->
-                    <div class="glass-card rounded-2xl p-4 space-y-3 z-30 border border-white/10">
-                        <!-- Progress Bar Simulator / Real Audio Sync -->
-                        <div class="space-y-1">
-                            <div class="w-full bg-neutral-800 h-1.5 rounded-full overflow-hidden cursor-pointer" onclick="seekSong(event)">
-                                <div id="song-progress" class="bg-spotify h-full w-0 rounded-full transition-all"></div>
-                            </div>
-                            <div class="flex justify-between text-[10px] text-neutral-400 font-mono">
-                                <span id="time-current">0:00</span>
-                                <span id="time-total">0:00</span>
-                            </div>
-                        </div>
-
-                        <!-- Buttons -->
-                        <div class="flex items-center justify-center space-x-6">
-                            <button onclick="previousTrack()" class="text-neutral-400 hover:text-white transition-colors text-lg cursor-pointer">
-                                <i class="fa-solid fa-backward-step"></i>
-                            </button>
-                            <button id="player-play-btn" onclick="toggleSongPlay()" class="w-12 h-12 rounded-full bg-spotify text-black font-bold flex items-center justify-center text-xl shadow-[0_0_15px_rgba(29,185,84,0.6)] hover:scale-105 transition-all cursor-pointer">
-                                <i id="player-play-icon" class="fa-solid fa-play ml-0.5"></i>
-                            </button>
-                            <button onclick="nextTrack()" class="text-neutral-400 hover:text-white transition-colors text-lg cursor-pointer">
-                                <i class="fa-solid fa-forward-step"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SLIDE 5: LA CARTA SECRETA & CANJE VIP -->
-                <div class="slide-item absolute inset-0 flex flex-col justify-center space-y-5 opacity-0 transition-all duration-500 transform translate-y-4 pointer-events-none">
-                    <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Premio Especial</span>
-
-                    <h2 class="text-2xl sm:text-3xl font-extrabold leading-tight">
-                        ¡Felicidades por 2 Años!
-                    </h2>
-
-                    <!-- Romantic Card Preview -->
-                    <div class="glass-card rounded-3xl p-5 border border-spotify/30 space-y-3 text-center z-30 relative overflow-hidden">
-                        <div class="w-12 h-12 mx-auto rounded-full bg-spotify/20 border border-spotify/40 flex items-center justify-center text-spotify text-2xl">
-                            <i class="fa-solid fa-envelope-open-text"></i>
-                        </div>
-                        <h3 class="text-lg font-bold">Carta de Aniversario & Ticket VIP</h3>
-                        <p class="text-xs text-neutral-300 leading-relaxed">
-                            Has desbloqueado una carta escrita con el corazón y un vale de canje exclusivo para nuestra celebracion.
-                        </p>
-
-                        <!-- Action Button for Letter Modal -->
-                        <button type="button" onclick="openLetterModal(event)" class="relative w-full py-3 px-4 bg-gradient-to-r from-spotify to-emerald-400 text-black font-extrabold text-xs tracking-wider uppercase rounded-xl shadow-[0_0_20px_rgba(29,185,84,0.4)] hover:shadow-[0_0_30px_rgba(29,185,84,0.7)] transition-all transform active:scale-95 flex items-center justify-center space-x-2 cursor-pointer z-50 pointer-events-auto">
-                            <i class="fa-solid fa-heart"></i>
-                            <span>LEER MI CARTA DE AMOR</span>
-                        </button>
-                    </div>
-
-                    <!-- Small Footer Branding -->
-                    <div class="text-center pt-2 z-30">
-                        <p class="text-[11px] text-neutral-400">Gracias por estos 2 años inolvidables. Te amo infinitamente. ❤️</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- BOTTOM NAVIGATION HINT -->
-            <div class="flex items-center justify-between text-xs text-neutral-500 font-medium z-30 pb-2">
-                <span onclick="prevSlide()" class="cursor-pointer hover:text-white flex items-center space-x-1">
-                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
-                    <span>Anterior</span>
-                </span>
-                <span class="text-[10px] tracking-widest uppercase text-neutral-400">Toca los lados para navegar</span>
-                <span onclick="nextSlide()" class="cursor-pointer hover:text-white flex items-center space-x-1">
-                    <span>Siguiente</span>
-                    <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                </span>
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <!-- ========================================== -->
-    <!-- MODAL: CARTA SECRETA & VOUCHER CANJEABLE   -->
-    <!-- ========================================== -->
-    <div id="letter-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-        <div class="relative w-full max-w-lg bg-neutral-900 border border-spotify/40 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto custom-scrollbar pointer-events-auto">
-            
-            <!-- Close Button -->
-            <button type="button" onclick="closeLetterModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white flex items-center justify-center text-sm transition-colors cursor-pointer z-50">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <!-- Modal Header -->
-            <div class="flex items-center space-x-3 border-b border-neutral-800 pb-4">
-                <i class="fa-solid fa-heart text-spotify text-2xl"></i>
-                <div>
-                    <h3 class="text-lg font-bold text-white">Carta de Aniversario</h3>
-                    <p class="text-xs text-spotify font-medium">Edición Limitada • 2 Años</p>
-                </div>
-            </div>
-
-            <!-- Romantic Letter Text -->
-            <div class="font-serif space-y-4 text-sm sm:text-base text-neutral-200 leading-relaxed italic">
-                <p>
-                    "Mi amor,
-                </p>
-                <p>
-                    Hoy cumplimos 2 años recorriendo este camino juntos, y si tuviera que volver a elegir cada segundo de mi vida, te elegiría a ti sin pensarlo dos veces.
-                </p>
-                <p>
-                    Gracias por ser mi refugio, mi mejor amiga, mi compañera de aventuras y la persona con la que puedo ser 100% yo mismo. Estos 730 días han sido los más felices, llenos de risas, aprendizajes y momentos inolvidables.
-                </p>
-                <p>
-                    Que este Loveify Wrapped sea solo el comienzo de la temporada 3. Te amo con todo mi corazón."
-                </p>
-            </div>
-
-            <!-- VIP Redeemable Date Coupon -->
-            <div id="voucher-card" class="bg-gradient-to-r from-emerald-900/40 via-neutral-900 to-teal-900/40 border-2 border-dashed border-spotify/50 rounded-2xl p-4 sm:p-5 text-center space-y-3 relative overflow-hidden">
-                <div class="absolute -right-8 -bottom-8 w-24 h-24 bg-spotify/10 rounded-full blur-xl pointer-events-none"></div>
-                
-                <span class="inline-block px-3 py-1 rounded-full bg-spotify text-black font-extrabold text-[10px] tracking-wider uppercase">
-                    CUPÓN EXCLUSIVO DE ANIVERSARIO
-                </span>
-
-                <h4 class="text-base sm:text-lg font-extrabold text-white">
-                    🎟️ Vale Por: Una Cita Romántica VIP
-                </h4>
-                
-                <p class="text-xs text-neutral-300">
-                    Válido para: Cena romántica, tu postre favorito y una noche inolvidable organizada 100% por mí.
-                </p>
-
-                <!-- Claim Coupon Button -->
-                <button type="button" id="claim-btn" onclick="claimVoucher()" class="py-2.5 px-6 bg-spotify hover:bg-emerald-400 text-black font-bold text-xs rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(29,185,84,0.4)] flex items-center justify-center space-x-2 mx-auto cursor-pointer">
-                    <i class="fa-solid fa-check-circle"></i>
-                    <span id="claim-btn-text">CANJEAR MI CITA AHORA</span>
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- JAVASCRIPT LOGIC & AUDIO PLAYER ENGINE     -->
-    <!-- ========================================== -->
-    <script>
-        // STORY SLIDES STATE
-        let currentSlide = 0;
-        const totalSlides = 5;
-        let slideInterval = null;
-        const slideDuration = 8000; // 8 seconds per slide
-        let isAudioPlaying = false;
-
-        // TRACKLIST INTEGRATION
-        const playlist = [
-            {
-                title: "En Vivo y En Directo",
-                artist: "Fonseca",
-                src: "./FONSECA.mp3",
-                cover: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Tanto",
-                artist: "Jesse & Joy",
-                src: "./JESSIE.mp3",
-                cover: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80"
-            }
-        ];
-
-        let currentTrackIndex = 0;
-        const audioPlayer = new Audio();
-        audioPlayer.src = playlist[0].src;
-
-        // Initialize App UI
-        document.addEventListener('DOMContentLoaded', () => {
-            setupProgressBars();
-            setupAudioEvents();
-        });
-
-        // START WRAPPED EXPERIENCE (FIXED EVENT PARAMETER)
-        function startWrapped(event) {
-            if (event && typeof event.stopPropagation === 'function') {
-                event.stopPropagation();
-            }
-            const welcomeScreen = document.getElementById('welcome-screen');
-            welcomeScreen.classList.add('opacity-0', 'pointer-events-none');
-            
-            setTimeout(() => {
-                welcomeScreen.style.display = 'none';
-            }, 700);
-
-            const storyView = document.getElementById('wrapped-story-view');
-            storyView.classList.remove('opacity-0', 'pointer-events-none');
-
-            playAudio();
-            showSlide(0);
-            startSlideTimer();
-            animateCounter();
-        }
-
-        // Setup HTML5 Audio Listeners
-        function setupAudioEvents() {
-            audioPlayer.addEventListener('timeupdate', () => {
-                if (!isNaN(audioPlayer.duration) && audioPlayer.duration > 0) {
-                    const pct = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-                    const progressEl = document.getElementById('song-progress');
-                    if (progressEl) progressEl.style.width = pct + '%';
-
-                    const currentEl = document.getElementById('time-current');
-                    if (currentEl) currentEl.innerText = formatTime(audioPlayer.currentTime);
-                    
-                    const totalEl = document.getElementById('time-total');
-                    if (totalEl) totalEl.innerText = formatTime(audioPlayer.duration);
-                }
-            });
-
-            audioPlayer.addEventListener('ended', () => {
-                nextTrack();
-            });
-        }
-
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-        }
-
-        // CREATE STORY PROGRESS BARS
-        function setupProgressBars() {
-            const container = document.getElementById('progress-bars-container');
-            container.innerHTML = '';
-            for (let i = 0; i < totalSlides; i++) {
-                const bar = document.createElement('div');
-                bar.className = 'h-1 flex-1 bg-white/20 rounded-full overflow-hidden';
-                bar.innerHTML = `<div id="pbar-${i}" class="progress-fill h-full bg-white w-0"></div>`;
-                container.appendChild(bar);
-            }
-        }
-
-        // SHOW SPECIFIC SLIDE
-        function showSlide(index) {
-            currentSlide = index;
-            const slides = document.querySelectorAll('.slide-item');
-            
-            slides.forEach((slide, idx) => {
-                if (idx === index) {
-                    slide.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-                    slide.classList.add('opacity-100', 'translate-y-0');
-                } else {
-                    slide.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-                    slide.classList.remove('opacity-100', 'translate-y-0');
-                }
-            });
-
-            // Update Top Progress Bars
-            for (let i = 0; i < totalSlides; i++) {
-                const pfill = document.getElementById(`pbar-${i}`);
-                if (i < index) {
-                    if (pfill) pfill.style.width = '100%';
-                } else if (i === index) {
-                    if (pfill) pfill.style.width = '0%';
-                } else {
-                    if (pfill) pfill.style.width = '0%';
-                }
-            }
-
-            resetSlideTimer();
-        }
-
-        // SLIDE NAVIGATION CONTROLLERS
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                showSlide(currentSlide + 1);
-            } else {
-                showSlide(0);
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                showSlide(currentSlide - 1);
-            } else {
-                showSlide(totalSlides - 1);
-            }
-        }
-
-        // TIMERS FOR AUTO ADVANCE
-        function startSlideTimer() {
-            clearInterval(slideInterval);
-            let elapsed = 0;
-            const intervalTime = 100;
-            
-            slideInterval = setInterval(() => {
-                elapsed += intervalTime;
-                const pct = (elapsed / slideDuration) * 100;
-                const currentBar = document.getElementById(`pbar-${currentSlide}`);
-                if (currentBar) currentBar.style.width = `${pct}%`;
-
-                if (elapsed >= slideDuration) {
-                    nextSlide();
-                }
-            }, intervalTime);
-        }
-
-        function resetSlideTimer() {
-            startSlideTimer();
-        }
-
-        // AUDIO CONTROL FUNCTIONS
-        function toggleAudio() {
-            if (isAudioPlaying) {
-                pauseAudio();
-            } else {
-                playAudio();
-            }
-        }
-
-        function playAudio() {
-            audioPlayer.play().then(() => {
-                isAudioPlaying = true;
-                updateAudioUI(true);
-            }).catch(e => {
-                console.log("Audio autoplay require interacción previa:", e);
-            });
-        }
-
-        function pauseAudio() {
-            audioPlayer.pause();
-            isAudioPlaying = false;
-            updateAudioUI(false);
-        }
-
-        function updateAudioUI(isPlaying) {
-            const icon = document.getElementById('sound-icon');
-            const playIcon = document.getElementById('player-play-icon');
-            const eqGraphic = document.getElementById('eq-graphic');
-
-            if (isPlaying) {
-                if (icon) icon.className = 'fa-solid fa-volume-high text-spotify';
-                if (playIcon) playIcon.className = 'fa-solid fa-pause';
-                if (eqGraphic) eqGraphic.classList.remove('paused');
-            } else {
-                if (icon) icon.className = 'fa-solid fa-volume-xmark';
-                if (playIcon) playIcon.className = 'fa-solid fa-play ml-0.5';
-                if (eqGraphic) eqGraphic.classList.add('paused');
-            }
-        }
-
-        function toggleSongPlay() {
-            toggleAudio();
-        }
-
-        function switchTrack(index) {
-            currentTrackIndex = index;
-            audioPlayer.src = playlist[index].src;
-            
-            document.getElementById('song-title-display').innerText = playlist[index].title;
-            document.getElementById('song-artist-display').innerText = `${playlist[index].artist} • Álbim Aniversario Vol. 2`;
-            document.getElementById('album-cover').src = playlist[index].cover;
-
-            const btn0 = document.getElementById('track-btn-0');
-            const btn1 = document.getElementById('track-btn-1');
-
-            if (index === 0) {
-                btn0.className = "px-3 py-1 rounded-full text-xs font-bold transition-all bg-spotify text-black shadow-md cursor-pointer";
-                btn1.className = "px-3 py-1 rounded-full text-xs font-bold transition-all glass-pill text-white/70 hover:text-white cursor-pointer";
-            } else {
-                btn1.className = "px-3 py-1 rounded-full text-xs font-bold transition-all bg-spotify text-black shadow-md cursor-pointer";
-                btn0.className = "px-3 py-1 rounded-full text-xs font-bold transition-all glass-pill text-white/70 hover:text-white cursor-pointer";
-            }
-
-            playAudio();
-        }
-
-        function nextTrack() {
-            const nextIdx = (currentTrackIndex + 1) % playlist.length;
-            switchTrack(nextIdx);
-        }
-
-        function previousTrack() {
-            const prevIdx = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-            switchTrack(prevIdx);
-        }
-
-        function seekSong(e) {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const pct = clickX / rect.width;
-            if (!isNaN(audioPlayer.duration)) {
-                audioPlayer.currentTime = pct * audioPlayer.duration;
-            }
-        }
-
-        // ANIMATE MINUTES COUNTER
-        function animateCounter() {
-            const target = 1051200; // 2 years in minutes
-            const element = document.getElementById('minutes-counter');
-            let current = 0;
-            const duration = 2000;
-            const step = Math.ceil(target / (duration / 30));
-
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                element.innerText = current.toLocaleString('es-ES');
-            }, 30);
-        }
-
-        // HANDLE DYNAMIC PHOTO UPLOAD
-        function handlePhotoUpload(event) {
-            const files = event.target.files;
-            if (!files || files.length === 0) return;
-
-            const grid = document.getElementById('memory-grid');
-            
-            Array.from(files).forEach((file) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const card = document.createElement('div');
-                    card.className = "relative group h-36 rounded-2xl overflow-hidden glass-card p-2 border border-white/10 flex flex-col justify-end animate-pulse-slow";
-                    card.innerHTML = `
-                        <img src="${e.target.result}" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                        <span class="relative text-[10px] font-extrabold text-spotify uppercase"># Recuerdo Especial</span>
-                        <p class="relative text-xs font-bold text-white truncate">${file.name.split('.')[0]}</p>
-                    `;
-                    grid.prepend(card);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // MODAL HANDLERS
-        function openLetterModal(event) {
-            if (event && typeof event.stopPropagation === 'function') {
-                event.stopPropagation();
-            }
-            clearInterval(slideInterval);
-            const modal = document.getElementById('letter-modal');
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            
-            if (window.confetti) {
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 },
-                    colors: ['#1DB954', '#ffffff', '#10B981']
-                });
-            }
-        }
-
-        function closeLetterModal() {
-            const modal = document.getElementById('letter-modal');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            startSlideTimer();
-        }
-
-        function claimVoucher() {
-            const btnText = document.getElementById('claim-btn-text');
-            const btn = document.getElementById('claim-btn');
-            
-            btnText.innerText = "¡CITA CANJEADA Y CONFIRMADA! ❤️";
-            btn.className = "py-2.5 px-6 bg-emerald-400 text-black font-extrabold text-xs rounded-full shadow-lg flex items-center justify-center space-x-2 mx-auto cursor-default";
-
-            if (window.confetti) {
-                confetti({
-                    particleCount: 150,
-                    spread: 100,
-                    origin: { y: 0.5 },
-                    colors: ['#1DB954', '#FFD700', '#FF69B4']
-                });
-            }
-        }
-    </script>
-</body>
-</html>
