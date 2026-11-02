@@ -418,8 +418,8 @@
                             Has desbloqueado una carta escrita con el corazón y un vale de canje exclusivo para nuestra celebracion.
                         </p>
 
-                        <!-- Action Button for Letter Modal -->
-                        <button onclick="openLetterModal()" class="w-full py-3 px-4 bg-gradient-to-r from-spotify to-emerald-400 text-black font-extrabold text-xs tracking-wider uppercase rounded-xl shadow-[0_0_20px_rgba(29,185,84,0.4)] hover:shadow-[0_0_30px_rgba(29,185,84,0.7)] transition-all transform active:scale-95 flex items-center justify-center space-x-2 cursor-pointer z-40">
+                        <!-- Action Button for Letter Modal (Z-INDEX Y POINTER EVENT FIX) -->
+                        <button type="button" onclick="openLetterModal(event)" class="relative w-full py-3 px-4 bg-gradient-to-r from-spotify to-emerald-400 text-black font-extrabold text-xs tracking-wider uppercase rounded-xl shadow-[0_0_20px_rgba(29,185,84,0.4)] hover:shadow-[0_0_30px_rgba(29,185,84,0.7)] transition-all transform active:scale-95 flex items-center justify-center space-x-2 cursor-pointer z-50 pointer-events-auto">
                             <i class="fa-solid fa-heart"></i>
                             <span>LEER MI CARTA DE AMOR</span>
                         </button>
@@ -454,11 +454,11 @@
     <!-- ========================================== -->
     <!-- MODAL: CARTA SECRETA & VOUCHER CANJEABLE   -->
     <!-- ========================================== -->
-    <div id="letter-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
-        <div class="relative w-full max-w-lg bg-neutral-900 border border-spotify/40 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto custom-scrollbar">
+    <div id="letter-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div class="relative w-full max-w-lg bg-neutral-900 border border-spotify/40 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 max-h-[85vh] overflow-y-auto custom-scrollbar pointer-events-auto">
             
             <!-- Close Button -->
-            <button onclick="closeLetterModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white flex items-center justify-center text-sm transition-colors cursor-pointer">
+            <button type="button" onclick="closeLetterModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-neutral-800 hover:bg-neutral-700 text-white flex items-center justify-center text-sm transition-colors cursor-pointer z-50">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
@@ -504,7 +504,7 @@
                 </p>
 
                 <!-- Claim Coupon Button -->
-                <button id="claim-btn" onclick="claimVoucher()" class="py-2.5 px-6 bg-spotify hover:bg-emerald-400 text-black font-bold text-xs rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(29,185,84,0.4)] flex items-center justify-center space-x-2 mx-auto cursor-pointer">
+                <button type="button" id="claim-btn" onclick="claimVoucher()" class="py-2.5 px-6 bg-spotify hover:bg-emerald-400 text-black font-bold text-xs rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(29,185,84,0.4)] flex items-center justify-center space-x-2 mx-auto cursor-pointer">
                     <i class="fa-solid fa-check-circle"></i>
                     <span id="claim-btn-text">CANJEAR MI CITA AHORA</span>
                 </button>
@@ -551,7 +551,7 @@
             setupAudioEvents();
         });
 
-        // START WRAPPED EXPERIENCE (Fix handler)
+        // START WRAPPED EXPERIENCE
         function startWrapped() {
             const welcomeScreen = document.getElementById('welcome-screen');
             welcomeScreen.classList.add('opacity-0', 'pointer-events-none');
@@ -563,9 +563,7 @@
             const storyView = document.getElementById('wrapped-story-view');
             storyView.classList.remove('opacity-0', 'pointer-events-none');
 
-            // Play audio automatically upon entering
             playAudio();
-            
             showSlide(0);
             startSlideTimer();
             animateCounter();
@@ -731,7 +729,6 @@
             document.getElementById('song-artist-display').innerText = `${playlist[index].artist} • Álbim Aniversario Vol. 2`;
             document.getElementById('album-cover').src = playlist[index].cover;
 
-            // Highlight buttons
             const btn0 = document.getElementById('track-btn-0');
             const btn1 = document.getElementById('track-btn-1');
 
@@ -807,13 +804,13 @@
             });
         }
 
-        // MODAL HANDLERS
-        function openLetterModal() {
+        // MODAL HANDLERS (FIXED)
+        function openLetterModal(event) {
+            if (event) event.stopPropagation();
             clearInterval(slideInterval);
             const modal = document.getElementById('letter-modal');
             modal.classList.remove('opacity-0', 'pointer-events-none');
             
-            // Launch Confetti
             if (window.confetti) {
                 confetti({
                     particleCount: 100,
